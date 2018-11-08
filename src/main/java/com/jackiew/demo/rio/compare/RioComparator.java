@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Scanner;
 import java.util.Set;
 
 import com.jackiew.demo.rio.vo.GlobalRIo;
@@ -228,18 +229,20 @@ public class RioComparator {
 
     public static void main(String[] args) throws IOException {
         System.out.println("please input file path, separate by whitespace\n");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String path = reader.readLine();
-        String[] pathArr = path.split("\\s");
-        if (pathArr.length == 0) {
-            System.out.println("please input valid path.");
-        } else {
-            for (String p : pathArr) {
-                System.out.println("process file:" + p);
-                RioComparator rioComparator = new RioComparator(p);
-                rioComparator.compare();
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            String path = scanner.next();
+            if ("quit".equals(path)) {
+                System.exit(0);
             }
-            System.out.println("finish");
+            System.out.println("process file:" + path);
+            try {
+                RioComparator rioComparator = new RioComparator(path);
+                rioComparator.compare();
+                System.out.println("done");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }
