@@ -1,0 +1,13 @@
+<html>
+<head>
+    <title>upload page</title>
+</head>
+<body>
+<div>please upload the input file as following format:global-xxx.xslx,local-xxx.xslx</div>
+<form action="/compare" method="post" enctype="multipart/form-data" >
+    <label for="files">input file</label> <input id="files" name="files" type="file" multiple="multiple">
+    <label for="emails">your email</label> <input id="emails" name="emails" type="text">
+    <button type="submit">submit</button>
+</form>
+</body>
+</html>
