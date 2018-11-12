@@ -1,14 +1,13 @@
 package com.jackiew.demo.rio.email;
 
+import java.io.ByteArrayOutputStream;
+import java.util.Map;
+import javax.mail.internet.MimeMessage;
+
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-
-import javax.mail.internet.MimeMessage;
-import java.awt.print.PrinterAbortException;
-import java.io.ByteArrayOutputStream;
-import java.util.Map;
 
 public class ReportMimeMessagePreparator implements MimeMessagePreparator {
     private final String emails;
@@ -22,7 +21,7 @@ public class ReportMimeMessagePreparator implements MimeMessagePreparator {
     @Override
     public void prepare(MimeMessage message) throws Exception {
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        helper.setFrom("scottfield@qq.com");
+        helper.setFrom("xxx@xxx.com");
         helper.setTo(emails.split(";"));
         helper.setText("please refer to the attachment for detail.");
         helper.setSubject("rio compare report");
