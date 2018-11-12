@@ -1,51 +1,32 @@
 package com.jackiew.demo.rio;
 
+import static java.util.stream.Collectors.toList;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.jackiew.demo.rio.compare.RioComparator;
 import com.jackiew.demo.rio.email.ReportMimeMessagePreparator;
 import com.jackiew.demo.rio.vo.InputFile;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
-
 @Controller
-@RequestMapping("/compare")
+@RequestMapping("")
 public class CompareController {
     @Autowired
     private RioComparator comparator;
     @Autowired
-    @Qualifier(value = "mailSender")
     private JavaMailSender sender;
 
     @RequestMapping(method = RequestMethod.GET)
@@ -59,7 +40,7 @@ public class CompareController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String compare(@RequestParam List<MultipartFile> files, @RequestParam String emails) throws IOException, MessagingException {
+    public String compare(@RequestParam List<MultipartFile> files, @RequestParam String emails) throws IOException {
         if (StringUtils.isEmpty(emails)) {
             throw new IllegalArgumentException("emails:(" + emails + ") list is invalid.");
     }
@@ -98,10 +79,10 @@ public class CompareController {
             reportMap.put(entry.getKey() + ".xlsx", resultWorkbook);
         }
         sender.send(new ReportMimeMessagePreparator(emails, reportMap));
-        return "redirect:/compare/success";
+        return "redirect:/success";
     }
 
-    public static void main(String[] args) throws MessagingException {
+    public static void main(String[] args) {
         System.out.println("cn.xlsx".substring(0, "cn.xlsx".lastIndexOf(".")));
     }
 }

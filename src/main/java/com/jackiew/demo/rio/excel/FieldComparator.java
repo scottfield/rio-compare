@@ -1,9 +1,9 @@
 package com.jackiew.demo.rio.excel;
 
-import com.jackiew.demo.rio.excel.annotation.CellInfo;
-
 import java.lang.reflect.Field;
 import java.util.Comparator;
+
+import com.jackiew.demo.rio.excel.annotation.CellInfo;
 
 public class FieldComparator implements Comparator<Field> {
     private static final FieldComparator comparator = new FieldComparator();

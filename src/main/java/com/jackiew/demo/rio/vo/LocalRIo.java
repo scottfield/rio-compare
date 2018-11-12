@@ -5,18 +5,18 @@ import lombok.Data;
 
 @Data
 public class LocalRIo {
-    @CellInfo(title = "partNo", columnIndex = 0)
+    @CellInfo(title = "partNo", columnIndex = 1)
     private String partNo;
-    @CellInfo(title = "modelName", columnIndex = 1)
+    @CellInfo(title = "modelName", columnIndex = 2)
     private String modelName;
-    @CellInfo(title = "orderType", columnIndex = 2)
+    @CellInfo(title = "orderType", columnIndex = 3)
     private int orderType;
-    @CellInfo(title = "rioQty", columnIndex = 3)
+    @CellInfo(title = "rioQty", columnIndex = 4)
     private int rioQty;
-    @CellInfo(title = "allocQty", columnIndex = 4)
+    @CellInfo(title = "allocQty", columnIndex = 5)
     private int allocQty;
-    @CellInfo(title = "offset", columnIndex = 5)
+    @CellInfo(title = "offset", columnIndex = 6)
     private int offset;
-    @CellInfo(title = "availQty", columnIndex = 6)
+    @CellInfo(title = "availQty", columnIndex = 7)
     private int availQty;
 }
